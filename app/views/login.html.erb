@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <%= yield %>
+
+    <h3>Login or Sign up to get started</h>
+
+
+      <h4>Sign up</h4>
+<div class="container">
+  <form action="<%= users_path %>" method="post">
+    <div class="form-group">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+      <input type="email" name="user[email]" placeholder="your email address">
+      <input type="password" name="user[password]" placeholder="your password">
+      <input type="submit" value="Sign Up!" class="button">
+    </div>
+
+  </form>
+
+  <h4>Log in</h4>
+
+  <form action="<%= session_path %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <input type="email" name="user[email]" placeholder="your email address">
+    <input type="password" name="user[password]" placeholder="your password">
+    <input type="submit" value="Log in!" class="button">
+  </form>
+</div>
+
+  </body>
+</html>

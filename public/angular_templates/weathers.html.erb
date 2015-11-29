@@ -1,0 +1,8 @@
+<div ng-controller="WeatherController as details">
+  <h4>Please enter your city or zipcode</h4>
+  <form ng-submit="details.getDetails()" action="index.html" method="post">
+    <input type="text" ng-model="createDetails()" placeholder="zipcode">
+
+    <input type="submit" value="Submit" class="btn-primary">
+  </form>
+</div>

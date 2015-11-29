@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html ng-app="WeatherApp">
+<head>
+  <title>Weather Ache</title>
+  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag  'normalize', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag  'skeleton', media: 'all', 'data-turbolinks-track' => true %>
+  <!-- <%= javascript_include_tag 'materialize', 'data-turbolinks-track' => true %> -->
+  <%= csrf_meta_tags %>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+
+
+
+</head>
+<base href="/"/>
+<body>
+
+
+  <div class="container">
+    <header ng-controller="HeaderController as header">
+      <h5>Determine Your Migraine Risk</h5>
+    </header>
+
+    <%= yield %>
+
+
+    <form>
+      <div class="input-field col s6" ng-controller="WeatherCtrl as ctrl">
+
+        <input type="text"
+        class="u-full-width"
+        id="city"
+        placeholder="enter your city"
+        ng-model='ctrl.location'
+        ng-submit="ctrl.getWeather()" /> <br>
+
+        <button class="button" ng-click="ctrl.getWeather(); ctrl.getCurrent();">Get Weather</button>
+
+
+      </form>
+
+  <!-- Risk Alert -->
+  <div class="container" style="">
+    <div class="row">
+      <div class="eleven columns">
+        <!-- High Alert (drop) -->
+        <div class="alert" id="message-alert" style="background-color:rgb(255, 126, 126)" ng-show="ctrl.diff<-15 && ctrl.diff >-10">Migraine Risk: High: pressure is dropping {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+        <!-- Medium Alert (drop) -->
+        <div class="alert" id="message-alert" style="" ng-show="ctrl.diff<-10 && ctrl.diff >-5">Migraine Risk: Medium: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+        <!-- Low Alert (drop) -->
+        <div class="alert" id="message-alert" style="background-color:rgb(209, 249, 255)" ng-show="ctrl.diff<-5">Migraine Risk: Low: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+        <!-- Medium Alert (increase) -->
+        <div class="alert" id="message-alert" style="background-color:rgb(209, 249, 255)" ng-show="ctrl.diff>14 && ctrl.diff <17 ">Migraine Risk: Medium: pressure by increasing by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+        <!-- Low Alert -->
+        <div class="alert" id="message-alert" style="background-color:rgb(230, 204, 255)" ng-show="ctrl.diff>10 && ctrl.diff < 14">Migraine Risk: Low: pressure is increasing by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+        <!-- No Alert  -->
+        <div class="alert" id="message-alert" style="background-color:rgb(210, 255, 218)" ng-show="ctrl.diff>=0 && ctrl.diff <= 10 || ctrl.diff<=0">Migraine Risk: None</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h4>Weather for: {{ctrl.name}}</h4>
+    <p>
+      {{ctrl.description}} <img ng-src="{{ctrl.img}}" alt="" />
+    </p>
+    <p>
+      Current temp: {{ctrl.temp | KtoF | number:1}} &deg; F
+    </p>
+    <p>
+      Current pressure: {{ctrl.pressure}} hpa
+    </p>
+    <p>
+      Current humidity: {{ctrl.humidity}} %
+    </p>
+  </div>
+
+  <h4>Forecast</h4>
+  <table  class="u-full-width">
+    <thead>
+      <tr>
+        <th>Date & Time</th>
+        <th>Temp</th>
+        <th>Pressure</th>
+        <th>Humidity</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="list in ctrl.list">
+      <tr>
+        <td>
+          {{list.dt * 1000 | date:"EEEE 'at' h:mma"}}
+        </td>
+        <td>
+          {{list.main.temp | KtoF | number:1}} &deg; F
+        </td>
+        <td>
+          {{list.main.pressure}} hpa
+        </td>
+        <td>
+          {{list.main.humidity}} %
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+
+</div>
+
+
+<div ng-view>
+
+</div>
+
+
+<%= javascript_include_tag 'angular', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'app', 'data-turbolinks-track' => true %>
+
+
+</body>
+</html>
