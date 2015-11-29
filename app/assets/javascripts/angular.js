@@ -46,7 +46,7 @@ function ($http){
 
  // eaf6fe412d32917ff999cc01f8b23979
 
-     $http.get('http://api.openweathermap.org/data/2.5/forecast?q='+this.location+'&APPID=eaf6fe412d32917ff999cc01f8b23979')
+     $http.get('//api.openweathermap.org/data/2.5/forecast?q='+this.location+'&APPID=eaf6fe412d32917ff999cc01f8b23979')
      .success(
 
        function(data) {

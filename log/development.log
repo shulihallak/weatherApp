@@ -39936,3 +39936,43 @@ Started GET "/session" for ::1 at 2015-11-23 13:57:39 -0500
 Processing by SessionController#current_user as JSON
   Rendered session/current_user.json.jbuilder (9.6ms)
 Completed 200 OK in 20ms (Views: 18.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2015-11-29 17:47:25 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (50.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ApplicationController#login as HTML
+  Rendered login.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 476ms (Views: 462.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-9e1bf9a4dfcd35bbdeeac00610ed9646304b7da1326846591cf4d3caf907f7e2.js?body=1" for ::1 at 2015-11-29 17:47:28 -0500
+
+
+Started GET "/application/angular" for ::1 at 2015-11-29 17:47:31 -0500
+Processing by ApplicationController#angular as HTML
+  Rendered layouts/angular.html.erb within layouts/application (135.9ms)
+Completed 200 OK in 246ms (Views: 244.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/materialize.self-48b1d1885f4bb079acb6ef8b27512f10437a33ef9d72e40359a06587e2736b26.css?body=1" for ::1 at 2015-11-29 17:47:31 -0500
+
+
+Started GET "/assets/materialize.min.self-4bcdf3e320b052fa026570b440523d519bbde30e75c9686419e2d9507a1752b9.css?body=1" for ::1 at 2015-11-29 17:47:31 -0500
+
+
+Started GET "/assets/weathers.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-29 17:47:31 -0500
+
+
+Started GET "/assets/application.self-4cad5e716773f47242d5a05f76d5162fc841819dc6f7b4dc7f40df3aa88e293a.css?body=1" for ::1 at 2015-11-29 17:47:31 -0500
+
+
+Started GET "/assets/angular.self-01c022008014257b2fff9471f2866f6e85301582a6a6a9e213cffcd247ad6be2.js?body=1" for ::1 at 2015-11-29 17:47:31 -0500
+
+
+Started GET "/assets/app.self-aa27dab301c99938238f80aef874632d174107ac809c343ac56ec90c882ceff3.js?body=1" for ::1 at 2015-11-29 17:47:31 -0500
+
+
+Started GET "/session" for ::1 at 2015-11-29 17:47:31 -0500
+Processing by SessionController#current_user as JSON
+  Rendered session/current_user.json.jbuilder (9.4ms)
+Completed 200 OK in 17ms (Views: 15.8ms | ActiveRecord: 0.0ms)
