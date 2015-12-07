@@ -32,7 +32,7 @@
         <input type="text"
         class="u-full-width"
         id="city"
-        placeholder="enter your city"
+        placeholder="enter your zipcode"
         ng-model='ctrl.location'
         ng-submit="ctrl.getWeather()" /> <br>
 
@@ -47,8 +47,9 @@
       <div class="eleven columns">
         <!-- High Alert (drop) -->
         <div class="alert" id="message-alert" style="background-color:rgb(255, 126, 126)" ng-show="ctrl.diff<-15 && ctrl.diff >-10">Migraine Risk: High: pressure is dropping {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+        <div class="alert" id="message-alert" style="background-color:rgb(255, 166, 47)" ng-show="ctrl.diff<-5 && ctrl.diff >-10">Migraine Risk: Medium: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
         <!-- Medium Alert (drop) -->
-        <div class="alert" id="message-alert" style="" ng-show="ctrl.diff<-10 && ctrl.diff >-5">Migraine Risk: Medium: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+        <div class="alert" id="message-alert" style="background-color:rgb(255, 166, 47)" ng-show="ctrl.diff<-10 && ctrl.diff >-5">Migraine Risk: Medium: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
         <!-- Low Alert (drop) -->
         <div class="alert" id="message-alert" style="background-color:rgb(209, 249, 255)" ng-show="ctrl.diff<-5">Migraine Risk: Low: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
         <!-- Medium Alert (increase) -->
@@ -57,6 +58,8 @@
         <div class="alert" id="message-alert" style="background-color:rgb(230, 204, 255)" ng-show="ctrl.diff>10 && ctrl.diff < 14">Migraine Risk: Low: pressure is increasing by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
         <!-- No Alert  -->
         <div class="alert" id="message-alert" style="background-color:rgb(210, 255, 218)" ng-show="ctrl.diff>=0 && ctrl.diff <= 10 || ctrl.diff<=0">Migraine Risk: None</div>
+
+        <div class="alert" id="message-alert" style="background-color:rgb(210, 255, 218)" ng-show="ctrl.diff<=0 && ctrl.diff >= -5 || ctrl.diff<=0">Migraine Risk: None</div>
       </div>
     </div>
   </div>

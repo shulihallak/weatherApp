@@ -19,7 +19,14 @@ app.filter('KtoF', function(){
 app.controller('WeatherCtrl', ['$http',
 function ($http){
 
+    this.getLatLong = function () {
+      var ctrl = this;
+      $http.get('https://www.zipcodeapi.com/rest/hmEsjHTFPnsxCdsOqkdGqZIuuNMEmigDFU5YCZDrm5YZjrNKL1qc09GuWt9iMqWr/info.json/'+ this.zip + '/degrees')
+      
+    }
+
     this.getCurrent = function() {
+      // a90290a0d300fca731a149f574eb74e0 -- forecast io api key
       var ctrl = this;
       $http.get('http://api.openweathermap.org/data/2.5/weather?q=' + this.location + '&APPID=eaf6fe412d32917ff999cc01f8b23979')
       .success(
