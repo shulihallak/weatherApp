@@ -18,108 +18,144 @@
 <body>
 
 
-  <div class="container">
-    <header ng-controller="HeaderController as header">
-      <h5>Determine Your Migraine Risk</h5>
-    </header>
+  <%= yield %>
 
-    <%= yield %>
+<div class="container">
+  <h3>Determine your migraine risk!</h3>
+</div>
 
+<div class="container" ng-controller="WeatherCtrl as ctrl">
+  <form>
+    <div class="input-field col s6">
 
-    <form>
-      <div class="input-field col s6" ng-controller="WeatherCtrl as ctrl">
+      <input type="text"
+      class="u-full-width"
+      id="city"
+      placeholder="enter your city"
+      ng-model='ctrl.zip'
+      ng-submit="ctrl.getLatLong()" /> <br>
 
-        <input type="text"
-        class="u-full-width"
-        id="city"
-        placeholder="enter your zipcode"
-        ng-model='ctrl.location'
-        ng-submit="ctrl.getWeather()" /> <br>
+      <button class="button" ng-click="ctrl.getLatLong();">Migraine Risk</button>
+    </form>
+  </div>
 
-        <button class="button" ng-click="ctrl.getWeather(); ctrl.getCurrent();">Get Weather</button>
+    <h4>Weather for: {{ctrl.city}} {{ctrl.state}}</h4>
 
+    <!-- <h5>Current Conditions: {{ctrl.summary}} <img ng-src="{{ctrl.icon}}" alt=""/> </h5> -->
+    <p>
+      Summary: {{ctrl.summary}}
+    </p>
+    <p>
+      Temp: {{ctrl.temp |number:1}} &deg;F
+    </p>
+    <p>
+      Humidity: {{ctrl.humidity}} %
+    </p>
+    <p>
+      Pressure: {{ctrl.pressure}} hba
+    </p>
 
-      </form>
+    <!-- Risk Alert -->
+    <div class="container" style="">
+      <div class="row">
+        <div class="eleven columns">
+          <!-- High Alert (drop) -->
+          <div class="alert" id="message-alert" style="background-color:rgb(255, 126, 126)" ng-show="ctrl.diff<-15 && ctrl.diff >-10">Migraine Risk: High: pressure is dropping {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+          <div class="alert" id="message-alert" style="background-color:rgb(255, 166, 47)" ng-show="ctrl.diff<-5 && ctrl.diff >-10">Migraine Risk: Medium: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+          <!-- Medium Alert (drop) -->
+          <div class="alert" id="message-alert" style="background-color:rgb(255, 166, 47)" ng-show="ctrl.diff<-10 && ctrl.diff >-5">Migraine Risk: Medium: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+          <!-- Low Alert (drop) -->
+          <div class="alert" id="message-alert" style="background-color:rgb(209, 249, 255)" ng-show="ctrl.diff<-5">Migraine Risk: Low: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+          <!-- Medium Alert (increase) -->
+          <div class="alert" id="message-alert" style="background-color:rgb(209, 249, 255)" ng-show="ctrl.diff>14 && ctrl.diff <17 ">Migraine Risk: Medium: pressure is increasing by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+          <!-- Low Alert -->
+          <div class="alert" id="message-alert" style="background-color:rgb(230, 204, 255)" ng-show="ctrl.diff>10 && ctrl.diff < 14">Migraine Risk: Low: pressure is increasing by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+          <!-- No Alert  -->
+          <div class="alert" id="message-alert" style="background-color:rgb(210, 255, 218)" ng-show="ctrl.diff>=0 && ctrl.diff <= 10 || ctrl.diff<=0">Migraine Risk: None: pressure by decreasing by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
 
-  <!-- Risk Alert -->
-  <div class="container" style="">
-    <div class="row">
-      <div class="eleven columns">
-        <!-- High Alert (drop) -->
-        <div class="alert" id="message-alert" style="background-color:rgb(255, 126, 126)" ng-show="ctrl.diff<-15 && ctrl.diff >-10">Migraine Risk: High: pressure is dropping {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
-        <div class="alert" id="message-alert" style="background-color:rgb(255, 166, 47)" ng-show="ctrl.diff<-5 && ctrl.diff >-10">Migraine Risk: Medium: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
-        <!-- Medium Alert (drop) -->
-        <div class="alert" id="message-alert" style="background-color:rgb(255, 166, 47)" ng-show="ctrl.diff<-10 && ctrl.diff >-5">Migraine Risk: Medium: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
-        <!-- Low Alert (drop) -->
-        <div class="alert" id="message-alert" style="background-color:rgb(209, 249, 255)" ng-show="ctrl.diff<-5">Migraine Risk: Low: pressure is dropping by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
-        <!-- Medium Alert (increase) -->
-        <div class="alert" id="message-alert" style="background-color:rgb(209, 249, 255)" ng-show="ctrl.diff>14 && ctrl.diff <17 ">Migraine Risk: Medium: pressure by increasing by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
-        <!-- Low Alert -->
-        <div class="alert" id="message-alert" style="background-color:rgb(230, 204, 255)" ng-show="ctrl.diff>10 && ctrl.diff < 14">Migraine Risk: Low: pressure is increasing by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
-        <!-- No Alert  -->
-        <div class="alert" id="message-alert" style="background-color:rgb(210, 255, 218)" ng-show="ctrl.diff>=0 && ctrl.diff <= 10 || ctrl.diff<=0">Migraine Risk: None</div>
-
-        <div class="alert" id="message-alert" style="background-color:rgb(210, 255, 218)" ng-show="ctrl.diff<=0 && ctrl.diff >= -5 || ctrl.diff<=0">Migraine Risk: None</div>
+          <div class="alert" id="message-alert" style="background-color:rgb(210, 255, 218)" ng-show="ctrl.diff<=0 && ctrl.diff >= -5 || ctrl.diff<=0">Migraine Risk: None: pressure by increasing by {{ctrl.diff | number:1}} hpa over the next 48 hours </div>
+        </div>
       </div>
     </div>
+
+    <div class="container">
+      <h4>7 Day Forecast</h4>
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Summary</th>
+            <th>Max Temp</th>
+            <th>Min Temp</th>
+            <th>Pressure</th>
+            <th>Humidity</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="data in ctrl.daily.data">
+          <tr>
+            <td>
+              {{data.time * 1000 | date:"EEEE"}}
+            </td>
+            <td>
+              {{data.summary}}
+            </td>
+            <td>
+              {{data.temperatureMax | number:1}} &deg; F
+            </td>
+            <td>
+              {{data.temperatureMin | number:1}} &deg; F
+            </td>
+            <td>
+              {{data.pressure}} hpa
+            </td>
+            <td>
+              {{data.humidity}} %
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>2 Day Hourly Forecast</h4>
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th>Day & Time</th>
+            <th>Summary</th>
+            <th>Temp</th>
+            <th>Pressure</th>
+            <th>Humidity</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="data in ctrl.hourly.data">
+          <tr>
+            <td>
+              {{data.time * 1000 |  date:"EEEE 'at' h:mma"}}
+            </td>
+            <td>
+              {{data.summary}}
+            </td>
+            <td>
+              {{data.apparentTemperature | number:1}} &deg; F
+            </td>
+            <td>
+              {{data.pressure}} hpa
+            </td>
+            <td>
+              {{data.humidity}} %
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</div>
+  <div ng-view>
+
   </div>
 
-  <div class="container">
-    <h4>Weather for: {{ctrl.name}}</h4>
-    <p>
-      {{ctrl.description}} <img ng-src="{{ctrl.img}}" alt="" />
-    </p>
-    <p>
-      Current temp: {{ctrl.temp | KtoF | number:1}} &deg; F
-    </p>
-    <p>
-      Current pressure: {{ctrl.pressure}} hpa
-    </p>
-    <p>
-      Current humidity: {{ctrl.humidity}} %
-    </p>
-  </div>
 
-  <h4>Forecast</h4>
-  <table  class="u-full-width">
-    <thead>
-      <tr>
-        <th>Date & Time</th>
-        <th>Temp</th>
-        <th>Pressure</th>
-        <th>Humidity</th>
-      </tr>
-    </thead>
-    <tbody ng-repeat="list in ctrl.list">
-      <tr>
-        <td>
-          {{list.dt * 1000 | date:"EEEE 'at' h:mma"}}
-        </td>
-        <td>
-          {{list.main.temp | KtoF | number:1}} &deg; F
-        </td>
-        <td>
-          {{list.main.pressure}} hpa
-        </td>
-        <td>
-          {{list.main.humidity}} %
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div>
-
-</div>
-
-
-<div ng-view>
-
-</div>
-
-
-<%= javascript_include_tag 'angular', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'app', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'angular', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'app', 'data-turbolinks-track' => true %>
 
 
 </body>
