@@ -53793,3 +53793,5 @@ Started GET "/assets/angular.self-d7e49d5934b8c8c73909b9cb110a965c3ed57b47db5c45
 
 
 Started GET "/assets/app.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" for ::1 at 2015-12-08 10:49:02 -0500
+DEPRECATION WARNING: Defining a route where `to` is a controller without an action is deprecated. Please change `to: 'application/angular'` to `controller: 'application/angular'`. (called from block in <top (required)> at /Users/air/src/notes/weatherApp/weatherApp/config/routes.rb:4)
+DEPRECATION WARNING: Defining a route where `to` is a controller without an action is deprecated. Please change `to: 'application/angular'` to `controller: 'application/angular'`. (called from block in <top (required)> at /Users/air/src/notes/weatherApp/weatherApp/config/routes.rb:4)
